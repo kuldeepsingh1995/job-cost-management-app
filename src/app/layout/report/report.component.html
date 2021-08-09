@@ -1,0 +1,77 @@
+<div class="ecommerce-widget" *ngIf="data">
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h2 class="card-header">
+                    <span>Report</span>
+                    <!-- <input type="search" (keyup.enter)="search($event.target.value)" class="form-control-sm" placeholder="Write text and press enter" aria-controls="dataTable" [(ngModel)]="searchText" class="searchText"> -->
+                    <div class="form-row">
+
+                        <div  *ngIf="role=='Admin'" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-2" style="margin-top: 10px;">
+                            <label for="">Select a manager</label>
+                            <select [(ngModel)]="manager_id" (change)='FilterManager()' class="form-control">
+                                <option value="na">Select a manager</option>
+                                <option *ngFor="let manager of managerData;" value="{{ manager.id }}">{{ manager.name }}</option>
+                            </select>
+                        </div>
+                        <div  class="col-xl-3 col-lg-3 datepicker-div col-md-12 col-sm-12 col-12 mb-2" >
+                            <label for="">From</label>
+                            <input class="form-control" type="date" placeholder="From Date" (change)="from_date_fn()" [(ngModel)]="from_date"/>
+                        </div>
+                        <div class="col-xl-3  datepicker-div col-lg-3 col-md-12 col-sm-12 col-12 mb-2" >
+  
+                              <label for="">To</label>
+                              <input type="date" (change)="to_date_fn()" [(ngModel)]="to_date" class="form-control" />
+
+                        </div>
+                        <div class="col-xl-3  datepicker-div col-lg-3 col-md-12 col-sm-12 col-12 mb-2" >
+  
+                            <a style="font-size: small;cursor: pointer; color:blue; float:right" (click)="donwloadcsv()">Download CSV</a>
+
+                      </div>
+                         
+                    </div>
+
+                
+                </h2>
+                
+                <div class="card-body">
+                    <div class="table-div">
+                        <table id="mainTable" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Emp Name</th>
+                                <th *ngFor="let date of this.dates;">{{ date.small_date }}</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="data.length > 0">
+                            <tr *ngFor="let val of data | paginate: { itemsPerPage: PER_PAGE, currentPage: page, totalItems: totalCount }; let i = index">
+                                <td><span>{{ val.name }}</span></td>
+
+                                <td  *ngFor="let cDate of val.dates;">
+                                   <span class="box_purple">D: {{cDate.timeData.time_Worked.hour}} h {{cDate.timeData.time_Worked.minute}} m</span>
+                                    <span class="box_blue">B: {{cDate.timeData.time_break.hour}} h {{cDate.timeData.time_break.minute}} m</span>
+                                </td>
+    
+                                <td *ngIf="val.emp_total_hours">
+                                        <span class="box_purple">D: {{ convertMS3(val.emp_total_hours) }}</span>
+                                        <span class="box_blue">B: {{ convertMS3(val.emp_total_break) }}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tbody *ngIf="data.length == 0">
+                            <tr>
+                                <td colspan="6" style="text-align: center;">No record found.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

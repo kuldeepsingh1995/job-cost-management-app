@@ -1,0 +1,64 @@
+<div class="ecommerce-widget" *ngIf="data">
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h2 class="card-header">
+                    <span>Employee</span>
+                    <!-- <input type="search" (keyup.enter)="search($event.target.value)" class="form-control-sm" placeholder="Write text and press enter" aria-controls="dataTable" [(ngModel)]="searchText" class="searchText"> -->
+                    <div class="form-row">
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2" style="margin-top: 10px;">
+                            <select [(ngModel)]="manager_id" (change)='FilterManager()' class="form-control">
+                                <option value="">Select a manager</option>
+                                <option *ngFor="let manager of managerData;" value="{{ manager.id }}">{{ manager.name }}</option>
+                            </select>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2" style="margin-top: 10px;">
+                            <select (change)='FilterStatus($event)' class="form-control">
+                                <option value="">Select a status</option>
+                                <option *ngFor="let status of this.CONSTANTS.STATUS;" value="{{ status.id }}">{{ status.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                
+                </h2>
+                
+                <div class="card-body">
+                    <div class="table-div">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Assign manager</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="data.length > 0">
+                            <tr *ngFor="let val of data | paginate: { itemsPerPage: PER_PAGE, currentPage: page, totalItems: totalCount }; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ val.name }}</td>
+                                <td>{{ val.email}} <span class="is_admin_container" *ngIf="val.is_admin">Admin</span></td>
+                                <td>{{ val.managerName}}</td>
+                                <td>{{ getStatusLabel(val.roleStatus) }}</td>
+                                <td>
+                                    <button class="btn btn-outline-success btn-xs" (click)="edit(val.id,val.key)">Edit</button>        
+                                    <!-- <button class="btn btn-outline-danger btn-xs" (click)="delete(val.key,val.id)">Delete</button> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="data.length == 0">
+                            <tr>
+                                <td colspan="6" style="text-align: center;">No record found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

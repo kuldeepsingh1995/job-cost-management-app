@@ -1,0 +1,89 @@
+<div class="ecommerce-widget" *ngIf="data">
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h2 class="card-header">
+                    <span>Employees Timesheet submissions</span>
+                    <!-- <input type="search" (keyup.enter)="search($event.target.value)" class="form-control-sm" placeholder="Write text and press enter" aria-controls="dataTable" [(ngModel)]="searchText" class="searchText"> -->
+                    <div class="form-row">
+
+                        <div  *ngIf="role=='Admin'" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-2" style="margin-top: 10px;">
+                            <label for="">Select a manager</label>
+                            <select [(ngModel)]="manager_id" (change)='FilterManager()' class="form-control">
+                                <option value="">Select a manager</option>
+                                <option *ngFor="let manager of managerData;" value="{{ manager.id }}">{{ manager.name }}</option>
+                            </select>
+                        </div>
+                        <div  class="col-xl-3 col-lg-3 datepicker-div col-md-12 col-sm-12 col-12 mb-2" >
+                            <label for="">From</label>
+                            <input class="form-control" type="date" placeholder="From Date" (change)="from_date_fn()" [(ngModel)]="from_date"/>
+                        </div>
+                        <div class="col-xl-3  datepicker-div col-lg-3 col-md-12 col-sm-12 col-12 mb-2" >
+                            <!-- <mat-form-field color="blue" appearance="fill">
+                                <mat-label>To Date</mat-label>
+                                <input matInput value="" [matDatepicker]="picker2" (dateChange)="to_date_fn($event.value)" [(ngModel)]="to_date">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                              </mat-form-field> -->
+                              <label for="">To</label>
+                              <input type="date" (change)="to_date_fn()" [(ngModel)]="to_date" class="form-control" />
+
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-2" style="margin-top: 10px;">
+                            <label for="">Select a status</label>
+                            <select [(ngModel)]="status" (change)='FilterStatus()' class="form-control">
+                                <option value="new">Select a status</option>
+                                <option value="0">Pending</option>
+                                <option value="1">Approve</option>
+                                <option value="2">Rejected</option>
+                            </select>
+                        </div>
+                    </div>
+
+                
+                </h2>
+                
+                <div class="card-body">
+                    <div class="table-div">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Manager Name</th>
+                                <th scope="col">Time period</th>
+                                <th scope="col">Submitted at</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Remarks</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="newData.length > 0">
+                            <tr *ngFor="let val of data | paginate: { itemsPerPage: PER_PAGE, currentPage: page, totalItems: totalCount }; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ val.employeeName }}</td>
+                                <td>{{ val.managerName == '' ? 'N/a' : val.managerName }}</td>
+                                <td>{{ val.start_date}} to {{val.end_date}}</td>
+                                <td>{{ this.timestamptoDate(val.submitted_at)}}</td>
+                                <td>{{ val.status==0 ? 'Pending' : '' }}{{ val.status==1 ? 'Approved' : '' }}{{ val.status==2 ? 'Rejected' : '' }}</td>
+                                <td>{{ val.remarks }}</td>
+                                <td>
+                                    <button class="btn btn-outline-success btn-xs" (click)="edit(val)">View</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tbody *ngIf="data.length == 0">
+                            <tr>
+                                <td colspan="8" style="text-align: center;">No record found.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

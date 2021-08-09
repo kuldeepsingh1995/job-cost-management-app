@@ -1,0 +1,60 @@
+<div class="splash-container" style="margin:0">
+    
+        <!-- <div class="card-footer bg-white p-0  ">
+            <div class="card-footer-item card-footer-item-bordered">
+                <a href="#" class="footer-link">Create An Account</a></div>
+            <div class="card-footer-item card-footer-item-bordered">
+                <a href="#" class="footer-link">Forgot Password</a>
+            </div>
+        </div> -->
+    
+    <div class="login-box" style="padding-top: 7%;">
+        <div class="login-logo">
+            <!-- <a href="javascript:void(0);">
+               <img src="{{environment.image_url}}/assets/images/logo.png" class="login-logo">
+            </a> -->
+        </div>
+        {{this.users | json}}
+        <div class="login-box-body" style="border-radius: 10px;">
+            <div class="ribbon"></div>
+            <p class="login-box-msg">Sign up</p>
+            <h5 id="mainsuccess" class="alert alert-success" style="display: none"></h5>
+            <h5 id="mainerror" class="alert alert-danger" style="display: none"></h5>
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
+                <div class="form-group cstm-form" style="margin-bottom: 35px;display:none;">
+                    <input class="form-control form-control-md cstm-input-modal" type="text" placeholder="Name" autocomplete="off"  formControlName="name">
+                </div>
+                <div class="form-group cstm-form" style="margin-bottom: 35px;display:none;">
+                    <input class="form-control form-control-md cstm-input-modal" type="email" placeholder="Email" autocomplete="off"  formControlName="email">
+                </div>
+                <div class="form-group cstm-form" style="margin-bottom: 35px;display:none;">
+                    <input class="form-control form-control-md  cstm-input-modal" type="password" placeholder="Password"  formControlName="password">
+                </div>
+                <div class="form-group cstm-form" style="margin-bottom: 35px;display:none;">
+                    <select class="form-control form-control-md  cstm-input-modal" formControlName="role">
+                        <option value="">Select a role</option>
+                        <option value="1">Manager</option>
+                        <option value="2">Employee</option>
+                    </select>
+                </div>
+                
+               
+                <button type="submit" class="btn btn-primary btn-block btn-flat signup cstm-modal-btn"
+                id="login_button" style="display:none;">
+                Sign Up
+            </button>
+            <div style="text-align:center;display:none;">OR</div>
+            <button (click)="signupWithMicrosoft()" class="btn btn-primary btn-block btn-flat signup cstm-modal-btn"
+            id="login_button" style="margin-top: 55px;">
+            Sign Up with Microsoft
+        </button>
+                
+            </form>
+               
+
+               
+
+               
+        </div>
+    </div>
+</div>

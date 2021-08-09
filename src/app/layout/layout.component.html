@@ -1,0 +1,153 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="main-wrapper">
+
+    <header class="topbar">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light">
+
+            <div class="navbar-header" id="n-header">
+                <a class="navbar-brand" routerLink="/layout/dashboard">
+                    <span>Job Costing</span>
+                </a>
+            </div>
+
+            <div class="navbar-collapse nav-h">
+
+                <ul class="navbar-nav mr-auto mt-md-0">
+                    <!-- This is  -->
+                    <li class="nav-item m-l-10" (click)="onClick()" id="collsp-menu"><a
+                            class="nav-link sidebartoggler  text-muted waves-effect waves-dark"
+                            href="javascript:void(0)"><img src="{{environment.image_url}}assets/images/menu.png"
+                                                           class="c-menu-img"></a></li>
+                </ul>
+
+                <ul class="navbar-nav my-lg-0">
+                    <li class="nav-item dropdown">
+                        <a style="font-size: 14px;" class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt-YkG5DuyGAhJ0eDLCPbC5MBOs9m5cXX8yA&usqp=CAU"
+                                 class="profile-img">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right scale-up">
+                            <ul class="dropdown-user">
+                                <li>
+                                    <div class="dw-user-box">
+                                        <div class="u-text">
+                                            <h4>{{userName}}</h4>
+                                            <p class="text-muted">{{email}}</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li  class="logout-a"><a (click)="logout()"><i class="fa fa-power-off"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-sidebar" id="aside-collapse">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+
+            <!-- End User profile text-->
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav navbar navbar-expand-lg navbar-light">
+
+                <div class="" id="navbarNav">
+                    <ul class=" sidebarnav navbar-nav flex-column">
+
+                        <li class="nav-item drop-menu" *ngIf="is_admin">
+                            <a class="nav-link" href="javascript:;" data-toggle="collapse" aria-expanded="false"
+                               data-target="#submenu-2" aria-controls="submenu-2">
+                                <img class="m-icon2" src="{{environment.image_url}}assets/images/fundraiser.png">
+                                <span class="c-content">Users</span>
+                            </a>
+                            <div id="submenu-2" class="collapse submenu">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" routerLink="/layout/users/pending-user">Pending User</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" routerLink="/layout/users/manager">List Manager</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" routerLink="/layout/users/employee">List Employee</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                      
+                        <li class="nav-item" *ngIf="is_admin || role == '2'" >
+                            <a class="nav-link" routerLink="/layout/report">
+                                <img class="m-icon2" src="{{environment.image_url}}assets/images/fundraiser.png">
+                                <span class="c-content">Report</span>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item" *ngIf="role == '1'">
+                            <a class="nav-link" routerLink="/layout/users/employee-manager" aria-expanded="false"
+                               aria-controls="submenu-2">
+                                <img class="m-icon2" src="{{environment.image_url}}assets/images/fundraiser.png">
+                                <span class="c-content">Employees</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" *ngIf="role == '1' || is_admin">
+                            <a class="nav-link" routerLink="/layout/timesheet-submissions" aria-expanded="false"
+                               aria-controls="submenu-2">
+                                <img class="m-icon2" src="{{environment.image_url}}assets/images/fundraiser.png">
+                                <span class="c-content">Employees Submission</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/layout/timesheet">
+                                <img class="m-icon2" src="{{environment.image_url}}assets/images/fundraiser.png">
+                                <span class="c-content">Fill Timesheet</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/layout/timesheet-submissions-emp" aria-expanded="false"
+                               aria-controls="submenu-2">
+                                <img class="m-icon2" src="{{environment.image_url}}assets/images/fundraiser.png">
+                                <span class="c-content">My Submissions</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+
+    <div class="page-wrapper">
+
+        <!-- <div class="row page-titles cstm-title">
+
+
+             <div>
+                 &lt;!&ndash; <button
+                     class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
+                         class="ti-settings text-white"></i></button> &ndash;&gt;
+             </div>
+         </div>-->
+        <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+

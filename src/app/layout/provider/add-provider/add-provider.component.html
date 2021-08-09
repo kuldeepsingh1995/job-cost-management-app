@@ -1,0 +1,85 @@
+<div class="ecommerce-widget">
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h2 class="card-header">Edit</h2>
+                <div class="card-body">
+                    <form [formGroup]="addEditForm" (ngSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-2">
+                                <label for="inputText3" class="col-form-label">Name </label><span class="required">*</span>
+                                <input id="inputText3" type="text" class="form-control" formControlName="name">
+                                <div *ngFor="let validation of validation_messages.name" >
+                                    <div *ngIf="addEditForm.get('name').hasError(validation.type) && (addEditForm.get('name').dirty || addEditForm.get('name').touched)" class="alert alert-danger">
+                                      {{validation.message}}
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="form-row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-2">
+                                <label class="col-form-label">Select a role </label>
+                                <select formControlName="role" class="form-control" placeholder="Select a role">
+                                    <option value="">Select a role</option>
+                                    <option value="1">Manager</option>
+                                    <option value="2">Employee</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-row" *ngIf="addEditForm.value.role == '2'">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-2">
+                                <label class="col-form-label">Select Manager</label>
+                                <select formControlName="managerId" class="form-control">
+                                    <option value=""> Select Manager</option>
+                                    <option *ngFor="let type of mangerList" [value]="type.id">
+                                        {{type.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-2">
+                                <label class="col-form-label">Status</label>
+                                <select formControlName="roleStatus" class="form-control">
+                                    <option *ngFor="let type of CONSTANTS.STATUS" [value]="type.id">
+                                        {{type.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-2">
+                                <label for="inputText4" class="col-form-label checkbox_alignment">
+                                    <input id="inputText4" type="checkbox" class="form-control" formControlName="is_admin"> Is Admin </label>
+                                
+                           
+                            </div>
+                        </div>
+ 
+                        <div class="form-row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-2">
+                                <label for="inputText3" class="col-form-label">ClockIt Id </label><span class="required">*</span>
+                                <input id="inputText3" type="text" class="form-control" formControlName="clockit_empId">
+                                <!-- <div *ngFor="let validation of validation_messages.clockit_empId" >
+                                    <div *ngIf="addEditForm.get('clockit_empId').hasError(validation.type) && (addEditForm.get('clockit_empId').dirty || addEditForm.get('clockit_empId').touched)" class="alert alert-danger">
+                                      {{validation.message}}
+                                  </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="submit" class="btn btn-outline-light" [disabled]="addEditForm.invalid" >Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

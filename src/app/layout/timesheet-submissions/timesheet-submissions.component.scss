@@ -1,0 +1,21 @@
+.mat-form-field{
+    background: #eef5f9;
+    // color:blue;
+}
+
+.datepicker-div{
+    background: none;
+}
+.datepicker-div *{
+    background: none;
+    // color: #000;
+}
+.datepicker-div input[type="date"] {
+    font-size: 19px !important;
+    border: 1px solid gainsboro !important;
+    color: gray;
+    padding: 2px 5px;
+    margin-top: 9px;
+    border-radius: 2px;
+    width:100%;
+}

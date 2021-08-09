@@ -1,0 +1,137 @@
+<div class="container-fluid" style="padding: 0">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="alert alert-primary" *ngIf="displayAlreadySubMsg==true">Timesheet Already Submitted</div>
+    <div class="alert alert-success" *ngIf="displayApprovedMsg==true">Timesheet Approved successfully</div>
+    <div class="alert alert-danger" *ngIf="displayRejectedMsg==true">Timesheet Rejected Reason: {{ this.RejectedReason }}</div>
+    <div class="card-group">
+        <div class="row" style="width:100%;    margin: 0;">
+            <div class="event-calender">
+                <div class="selectWrapper-div">
+                    <div class="datepicker-header">
+                        <div class="dp-arrow-div">
+                            <a class="dp-prev"  (click)="prev()" data-select="prev"><i
+                                class="fa fa-angle-left"></i></a>
+                            <a class="dp-next"  (click)="next()" data-select="next"><i
+                                class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="s-wrap">
+                     <!--<div class="sidebar">
+                        <div class="table-div">
+                            <table class="table-datepicker">
+                                <tr class="d-th">
+                                    <td class="d-td empty-cell" >&nbsp;</td>
+                                </tr>
+                                <tr class="d-tr">
+                                    <td class="d-td empty-cell">
+                                        <div>&nbsp;</div>
+                                    </td>
+                                </tr>
+                                <tr class="d-tr">
+                                    <td class="d-td empty-cell">
+                                        <div>&nbsp;</div>
+                                    </td>
+                                </tr>
+                                <tr class="d-tr" *ngFor="let company of this.compaines;">
+                                    <td class="d-td main-tr-parent">
+                                        <table class="table-group">
+                                            <tr>
+                                                <td class="d-td main-heading">
+                                                    <textarea class="textarea" data-gramm="false">{{company.company_name}}</textarea>
+                                                </td>
+                                            </tr>
+                                            <tr *ngFor="let task of company.titles">
+                                                <td class="d-td sub-heading">
+                                                <textarea class="textarea" data-gramm="false">{{task.label}}</textarea>
+                                            </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>-->
+                    <div class="table-div">
+                        <table class="table-datepicker">
+                            <tr class="d-th">
+                                <td class="d-td empty-cell" >&nbsp;</td>
+                                <td class="d-td empty-cell" >&nbsp;</td>
+                                <td class="d-td sub-heading" *ngFor="let day of this.days">{{day}}</td>
+                            </tr>
+
+                            <tr class="d-tr" *ngIf="this.dates.length > 0">
+                                <td class="d-td main-th-heading empty-cell" >&nbsp;</td>
+                                <td class="d-td empty-cell" >&nbsp;</td>
+                                <td class="d-td " *ngFor="let SheetDate1 of this.dates;">
+                                    <div>{{ SheetDate1.small_date }}</div>
+                                </td>
+                            </tr>
+
+                            <tr class="d-tr" *ngIf="this.dates.length > 0">
+                                <td class="d-td main-th-heading empty-cell" >&nbsp;</td>
+                                <td class="d-td  empty-cell" >&nbsp;</td>
+                                <td class="d-td checkInCheckoutOutCont" *ngFor="let SheetDate1 of this.dates;">
+                                     <div class="box_red" *ngIf="SheetDate1.punched_in">In: {{ SheetDate1.punched_in }}</div>
+                                     <div class="box_purple" *ngIf="SheetDate1.punched_out">Out: {{ SheetDate1.punched_out }}</div>
+                                     <div class="box_blue" *ngIf="SheetDate1.breakTime">B: {{ SheetDate1.breakTime.minute }} min : {{ SheetDate1.breakTime.seconds }} sec</div>
+                                </td>
+                            </tr>
+
+                            <tr class="d-tr" *ngFor="let company of this.compaines">
+                                <td class="d-td main-th-heading" >
+                                    {{company.company_name}}
+                                </td>
+                                <td colspan="100%" class="d-td main-tr-parent2">
+                                    <table class="table-group-2">
+                                        <tbody>
+                                        <!-- <tr class="d-tr">
+
+                                            <td class="d-td" *ngFor="let SheetDate of this.dates;">
+                                                <textarea readonly="true" class="textarea" ></textarea>
+                                            </td>
+                                        </tr> -->
+                                        <tr class="d-tr" *ngFor="let task of company.titles">
+                                            <td class="d-td">
+                                                <textarea [readonly]="true" class="textarea">{{ task.label }}</textarea>
+                                            </td>
+                                            <td class="d-td" *ngFor="let SheetDate of this.dates;" >
+
+                                                <!-- <span *ngFor="let sheetData of timesheetData;">
+                                                    <span *ngIf="sheetData.date==SheetDate.full_date && sheetData.task_name == task.name && sheetData.hours_worked!=''"> -->
+                                                        <textarea [readonly]="disableAllInputs" class="textarea" id="{{ SheetDate.full_date }}__{{ task.name }}" value="" (change)="hourInput($event, SheetDate.full_date, company.company_name, task.name)"></textarea>
+                                                    <!-- </span> -->
+
+                                                <!-- </span>     -->
+                                            </td>
+                                           
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4" *ngIf="this.timesheetSubmissionsLogs.length > 0" style="overflow: auto;max-height: 100px;">
+            <h3>Logs</h3> 
+            <p *ngFor="let submission of (this.timesheetSubmissionsLogs)?.slice().reverse();let i=index">
+                <span *ngIf="submission.status==0">{{ i + 1 }}. Pending</span>
+                <span *ngIf="submission.status==1">{{ i + 1 }}. Approved <span *ngIf="submission.remarks!=''">({{ submission.remarks }})</span></span>
+                <span *ngIf="submission.status==2">{{ i + 1 }}. Rejected <span *ngIf="submission.remarks!=''">({{ submission.remarks }})</span></span>
+            </p>
+        </div>
+    </div>
+    <br><br>
+    <div class="alert alert-success" *ngIf="displayTimesheetSubmitNotificaiton==true">Timesheet Submitted Successfully</div>
+    <button class="btn btn-primary" *ngIf="this.empRole==2 && (this.status=='new' || this.status=='2')" (click)="submitTimesheet()">Submit Timesheet</button>
+    <button class="btn btn-primary" *ngIf="(this.empRole==1 || this.empRole=='Admin') && (this.status=='new' || this.status=='2')" (click)="saveTimesheet()">Save Timesheet</button>
+</div>

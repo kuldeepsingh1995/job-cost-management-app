@@ -1,0 +1,48 @@
+<div class="ecommerce-widget" *ngIf="data">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h2 class="card-header">
+                    <span>Pending Users</span>
+                    <!-- <input type="search" (keyup.enter)="search($event.target.value)" class="form-control-sm" placeholder="Write text and press enter" aria-controls="dataTable" [(ngModel)]="searchText" class="searchText"> -->
+                </h2>
+                <div class="card-body">
+                    <div class="table-div">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="data.length > 0">
+                            <tr *ngFor="let val of data | paginate: { itemsPerPage: PER_PAGE, currentPage: page, totalItems: totalCount }; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ val.name }}</td>
+                                <td>{{ val.email}}</td>
+                                <td>{{ val.role == '1' ? 'Manager' : ''}}{{ val.role == '2' ? 'Employee' : ''}}{{ val.role == 'na' ? 'N/A' : ''}}</td>
+                                <td>{{ val.roleStatus == '1' ? 'Active' : 'Not Active'}}</td>
+                                <td>
+                                    <button class="btn btn-outline-success btn-xs" (click)="edit(val.id,val.key)">Edit
+                                    </button>
+                                    <!-- <button class="btn btn-outline-danger btn-xs" (click)="delete(val.key,val.id)">Delete</button> -->
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tbody *ngIf="data.length == 0">
+                            <tr>
+                                <td colspan="6" style="text-align: center;">No record found.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

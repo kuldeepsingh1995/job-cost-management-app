@@ -1,0 +1,66 @@
+<div class="ecommerce-widget" *ngIf="data">
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h2 class="card-header">
+                    <span>My Timesheet submissions</span>
+                    <!-- <input type="search" (keyup.enter)="search($event.target.value)" class="form-control-sm" placeholder="Write text and press enter" aria-controls="dataTable" [(ngModel)]="searchText" class="searchText"> -->
+                    <div class="form-row">
+                         
+                        <div class="col-xl-4 col-lg-4 datepicker-div col-md-12 col-sm-12 col-12 mb-2" >
+                            <input type="date" (change)="from_date_fn()" [(ngModel)]="from_date"/>
+
+                        </div>
+                        <div class="col-xl-4  datepicker-div col-lg-4 col-md-12 col-sm-12 col-12 mb-2" >
+                           
+                              <input type="date" (change)="to_date_fn()" [(ngModel)]="to_date"/>
+
+                        </div>
+                    </div>
+
+                
+                </h2>
+                
+                <div class="card-body">
+                    <div class="table-div"><table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col" *ngIf="this.role==2">Manager Name</th>
+                            <th scope="col">Time period</th>
+                            <th scope="col">Remarks</th>
+                            <th scope="col">Submitted at</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf="newData.length > 0">
+                        <tr *ngFor="let val of data | paginate: { itemsPerPage: PER_PAGE, currentPage: page, totalItems: totalCount }; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ val.employeeName }}</td>
+                            <td  *ngIf="this.role==2">{{ val.managerName }}</td>
+                            <td>{{ val.start_date}} to {{val.end_date}}</td>
+                            <td>{{ val.remarks}}</td>
+                            <td>{{ this.timestamptoDate(val.submitted_at)}}</td>
+                            <td>{{ val.status==0 ? 'Pending' : '' }}{{ val.status==1 ? 'Approved' : '' }}{{ val.status==2 ? 'Rejected' : '' }}</td>
+
+                            <td>
+                                <button class="btn btn-outline-success btn-xs" (click)="edit(val.key)">View</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody *ngIf="data.length == 0">
+                        <tr>
+                            <td colspan="6" style="text-align: center;">No record found.</td>
+                        </tr>
+                        </tbody>
+                    </table></div>
+
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

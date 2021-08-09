@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "jobcostingwebapp"
+  },
+  "targets": {
+    "jobcostingwebapp": {
+      "hosting": {
+        "dev": [
+          "jobcostingwebapp-dev"
+        ],
+        "master": [
+          "jobcostingwebapp-master"
+        ]
+      }
+    }
+  }
+}

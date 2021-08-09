@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: TeachableSans;
+    src: url(/font/TeachableSans-Bold.ttf);
+    src: url(font/TeachableSans-Medium.ttf);
+
+    src: url(font/TeachableSans-Regular.ttf);
+
+    src: url(font/TeachableSans-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: SourceSansPro;
+    src: url(font/SourceSansPro-Regular.otf);
+    src: url(font/SourceSansPro-Light.otf);
+    src: url(font/SourceSansPro-Black.otf);
+
+}
+@font-face {
+    font-family: Montserrat;
+    src: url(font/Montserrat-Bold.otf);
+    src: url(font/Montserrat-ExtraBold.otf);
+    src: url(font/Montserrat-Regular.otf);
+    src: url(font/Montserrat-Medium.otf);
+    src: url(font/Montserrat-Light.otf);
+    src: url(font/Montserrat-SemiBold.otf);
+   
+
+}
+@font-face {
+    font-family: TeachableSans Bold;
+    src: url(font/TeachableSans-Bold.ttf);
+}
+
+@font-face {
+    font-family: TeachableSans Medium;
+    src: url(font/TeachableSans-Medium.ttf);
+}
+
+@font-face {
+    font-family: TeachableSans SemiBold;
+    src: url(font/TeachableSans-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: TeachableSans Regular;
+    src: url(font/TeachableSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: SourceSansPro Regular;
+    src: url(font/SourceSansPro-Regular.otf);
+}
+@font-face {
+    font-family: SourceSansPro Light;
+    src: url(font/SourceSansPro-Light.otf);
+}
+@font-face {
+    font-family: SourceSansPro Black1;
+    src: url(font/SourceSansPro-Black.otf);
+}
+@font-face {
+    font-family: Montserrat Bold;
+    src: url(font/Montserrat-Bold.otf);
+}
+@font-face {
+    font-family: Montserrat ExtraBold;
+    src: url(font/Montserrat-ExtraBold.otf);
+}
+@font-face {
+    font-family: Montserrat Regular;
+    src: url(font/Montserrat-Regular.otf);
+}
+@font-face {
+    font-family: Montserrat Medium;
+    src: url(font/Montserrat-Medium.otf);
+}
+@font-face {
+    font-family: Montserrat Light;
+    src: url(font/Montserrat-Light.otf);
+   
+}
+@font-face {
+    font-family: Montserrat SemiBold;
+  
+    src: url(font/Montserrat-SemiBold.otf);
+}
+pagination-controls{
+    float: right;
+    margin-top: 20px;
+}
+.yes{
+    color:green;
+    font-weight:600;
+}
+.fa {
+    font: normal normal normal 14px/1 FontAwesome !important;
+    font-family: FontAwesome !important;
+}
+.no{
+    color:red;
+    font-weight:600;
+}
+h2.card-header span {
+    margin-bottom: 30px;
+    display: block;
+    margin-top: 10px;
+}
+* {
+    font-family: "segoe ui";
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white;
+}
+@media screen and (max-width: 992px){
+    table.table {
+        width: 800px;
+    }
+    .table-div {
+        overflow: auto;
+    }
+}

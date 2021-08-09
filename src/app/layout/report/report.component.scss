@@ -1,0 +1,55 @@
+.mat-form-field{
+    background: #eef5f9;
+    // color:blue;
+}
+
+.datepicker-div{
+    background: none;
+}
+.datepicker-div *{
+    background: none;
+    // color: #000;
+}
+.datepicker-div input[type="date"] {
+    font-size: 19px !important;
+    border: 1px solid gainsboro !important;
+    color: gray;
+    padding: 2px 5px;
+    margin-top: 9px;
+    border-radius: 2px;
+    width:100%;
+}
+.table-div {
+    overflow: auto;
+}
+
+.box_blue {
+    background: beige;
+    background: #3F51B5;
+    color: white;
+    border-radius: 5px;
+    white-space: nowrap;
+    display: block;
+    padding: 1px 5px;
+    margin-bottom: 1px;
+  }
+  .box_red {
+    background: beige;
+    background: #F44336;
+    color: white;
+    border-radius: 5px;
+    white-space: nowrap;
+    display: block;
+    padding: 1px 5px;
+    margin-bottom: 1px;
+  }
+  .box_purple {
+    background: beige;
+    background: #9c27b0;
+    color: white;
+    border-radius: 5px;
+    white-space: nowrap;
+    display: block;
+    padding: 1px 5px;
+    margin-bottom: 1px;
+  }
